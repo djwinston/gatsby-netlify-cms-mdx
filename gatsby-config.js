@@ -14,6 +14,19 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        extensions: [`.mdx`],
+        gatsbyRemarkPlugins: [
+          // "gatsby-remark-relative-images-local"
+          // {
+          //   resolve: `gatsby-remark-prismjs`,
+          //   options: remarkPrismJsOptions,
+          // },
+        ],
+      },
+    },
+    {
       // keep as first gatsby-source-filesystem plugin for gatsby image support
       resolve: "gatsby-source-filesystem",
       options: {
@@ -24,40 +37,47 @@ module.exports = {
     {
       resolve: "gatsby-source-filesystem",
       options: {
-        path: `${__dirname}/src/pages`,
-        name: "pages",
+        path: `${__dirname}/src/assets/img`,
+        name: "images",
       },
     },
     {
       resolve: "gatsby-source-filesystem",
       options: {
-        path: `${__dirname}/src/img`,
-        name: "images",
+        path: `${__dirname}/content`,
+        name: "root-content",
       },
     },
-    `gatsby-plugin-image`,
-    "gatsby-plugin-sharp",
-    "gatsby-transformer-sharp",
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        path: `${__dirname}/src/content`,
+        name: "src-content",
+      },
+    },
+    // `gatsby-plugin-image`,
+    // "gatsby-plugin-sharp",
+    // "gatsby-transformer-sharp",
     {
       resolve: "gatsby-transformer-remark",
       options: {
         plugins: [
-          'gatsby-remark-relative-images',
-          {
-            resolve: "gatsby-remark-images",
-            options: {
-              // It's important to specify the maxWidth (in pixels) of
-              // the content container as this plugin uses this as the
-              // base for generating different widths of each image.
-              maxWidth: 2048,
-            },
-          },
-          {
-            resolve: "gatsby-remark-copy-linked-files",
-            options: {
-              destinationDir: "static",
-            },
-          },
+          "gatsby-remark-relative-images-local",
+          // {
+          //   resolve: "gatsby-remark-images",
+          //   options: {
+          //     // It's important to specify the maxWidth (in pixels) of
+          //     // the content container as this plugin uses this as the
+          //     // base for generating different widths of each image.
+          //     maxWidth: 2048,
+          //   },
+          // },
+          // {
+          //   resolve: "gatsby-remark-copy-linked-files",
+          //   options: {
+          //     destinationDir: "static",
+          //   },
+          // },
         ],
       },
     },
@@ -76,4 +96,4 @@ module.exports = {
     }, // must be after other CSS plugins
     "gatsby-plugin-netlify", // make sure to keep it last in the array
   ],
-};
+}
